@@ -1,0 +1,5 @@
+server:
+  port: 8078
+  servlet:
+    context-path: /dib
+
