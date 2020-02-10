@@ -1,0 +1,2 @@
+DROP TABLE IF EXISTS beer_mash_temp;
+DROP TABLE IF EXISTS beer;

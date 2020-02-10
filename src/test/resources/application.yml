@@ -1,8 +1,10 @@
 server:
-  port: 8078
   servlet:
     context-path: /dib
+    
 spring:
+  profiles:
+    active: test
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     url: jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false;INIT=CREATE SCHEMA IF NOT EXISTS dib
@@ -10,7 +12,7 @@ spring:
     username: sa
     password:
     initialize: true
-#    data: classpath:data.sql
+    data: classpath:data.sql
     hikari:
       maximumPoolSize: 10
       minimumIdle: 5
@@ -20,8 +22,15 @@ spring:
       connection-test-query: SELECT 1
       poolName: DibServiceH2HikariPool
   jpa:
+    open-in-view: false
     hibernate:
-      ddl-auto: update
+#      ddl-auto: create-drop
+      properties:
+        javax:
+          persistence:
+            schema-generation:
+              drop-source: script-then-metadata
+              drop-script-source: drop-tables.sql
       naming:
         implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
@@ -34,5 +43,5 @@ spring:
     serialization:
       write_dates_as_timestamps: false
   flyway:
-    enabled: true
+    enabled: false
 beer.api.url.base: https://api.punkapi.com/v2/beers/
