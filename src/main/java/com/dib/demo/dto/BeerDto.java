@@ -18,6 +18,7 @@ import lombok.*;
 public class BeerDto {
 
     private long id;
+    private long externalId;
     private String name;
     private String description;
     private MethodDto method;

@@ -12,5 +12,5 @@ spring:
       ddl-auto: validate
     dialect: org.hibernate.dialect.MySQLDialect
 flyway:
-  enabled: false
+  enabled: true
 beer.api.url.base: https://api.punkapi.com/v2/beers/

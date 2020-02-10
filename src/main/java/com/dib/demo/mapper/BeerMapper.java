@@ -14,6 +14,7 @@ public class BeerMapper {
                 .name(beerDto.getName())
                 .mashTemp(beerDto.getMethod().getMashTemp()
                         .stream().map(item -> item.getTemp().getValue()).collect(Collectors.toList()))
+                .externalId(beerDto.getId())
                 .build();
     }
 

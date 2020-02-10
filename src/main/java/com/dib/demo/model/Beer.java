@@ -23,6 +23,12 @@ import java.util.Set;
 public class Beer extends BaseEntityAudit {
 
     /**
+     * External id
+     */
+    @Column(name = "external_id", nullable = false, unique = true)
+    private Long externalId;
+
+    /**
      * Beer name
      */
     @Column(name = "name", nullable = false)

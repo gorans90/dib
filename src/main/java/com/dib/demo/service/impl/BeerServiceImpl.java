@@ -15,7 +15,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.client.RestTemplate;
 
@@ -40,20 +39,28 @@ public class BeerServiceImpl implements BeerService {
     private RestTemplate restTemplate;
 
     @Override
-    @Transactional
     public void initialize() {
         List<Beer> beers = beerRepository.findAll();
         String url = StringUtils.join(apiRootUrl, Endpoints.RANDOM);
         List<Beer> beersToSave = new ArrayList<>();
+        List<Beer> savedBeers = new ArrayList<>();
+        try {
+            for (int i = beers.size(); i < 10; i++) {
+                ResponseEntity<BeerDto[]> response = restTemplate.exchange(url, HttpMethod.GET, null, BeerDto[].class);
+                for (BeerDto dto : response.getBody()) {
+                    beersToSave.add(BeerMapper.fromDto(dto));
+                }
+            }
 
-        for (int i = beers.size(); i < 10; i++) {
-            ResponseEntity<BeerDto[]> response = restTemplate.exchange(url, HttpMethod.GET, null, BeerDto[].class);
-            for (BeerDto dto : response.getBody()) {
-                beersToSave.add(BeerMapper.fromDto(dto));
+            savedBeers = beerRepository.saveAll(beersToSave);
+
+        } catch (Exception e) {
+            log.error("");
+        } finally {
+            if (savedBeers.size() < 10 && beers.size() < 10) {
+                initialize();
             }
         }
-
-        beerRepository.saveAll(beersToSave);
     }
 
     @Override

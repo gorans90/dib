@@ -9,6 +9,7 @@ import com.dib.demo.util.Endpoints;
 import com.dib.demo.util.JsonUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -45,7 +46,7 @@ public class BeerController {
     @GetMapping(value = Endpoints.ALL, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Get all beers",
             notes = "Send GET request to get all beers",
-            httpMethod = "GET", response = List.class)
+            httpMethod = "GET", response = BeerDto[].class)
     @ApiResponseCodes
     public ResponseEntity<List<BeerDto>> getAllBeers() throws NotFoundException {
         return ResponseEntity.ok(BeerMapper.toDtoList(beerService.getAll()));
@@ -68,6 +69,7 @@ public class BeerController {
             httpMethod = "GET", response = String.class)
     @ApiResponseCodes
     public ResponseEntity<String> initialize() {
+        beerService.initialize();
         return ResponseEntity.ok(JsonUtil.toJson("Data has been successfully initialized"));
     }
 }
