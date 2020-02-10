@@ -55,7 +55,7 @@ public class BeerServiceImpl implements BeerService {
             savedBeers = beerRepository.saveAll(beersToSave);
 
         } catch (Exception e) {
-            log.error("");
+            log.error("Error during bulk save: ", e.getMessage());
         } finally {
             if (savedBeers.size() < 10 && beers.size() < 10) {
                 initialize();

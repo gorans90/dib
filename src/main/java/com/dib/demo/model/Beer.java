@@ -2,12 +2,9 @@ package com.dib.demo.model;
 
 import com.dib.demo.model.base.BaseEntityAudit;
 import lombok.*;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Beer model class
@@ -47,8 +44,8 @@ public class Beer extends BaseEntityAudit {
     @Column(name = "mash_temp", nullable = false)
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(
-            name="beer_mash_temp",
-            joinColumns=@JoinColumn(name="beer_id")
+            name = "beer_mash_temp",
+            joinColumns = @JoinColumn(name = "beer_id")
     )
     private List<Integer> mashTemp;
 
