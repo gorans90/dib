@@ -42,7 +42,7 @@ public class Beer extends BaseEntityAudit {
     private String description;
 
     @Column(name = "mash_temp", nullable = false)
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     private List<Integer> mashTemp;
 
 }
