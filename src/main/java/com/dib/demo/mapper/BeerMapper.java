@@ -6,6 +6,10 @@ import com.dib.demo.model.Beer;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Mapper for {@link Beer} and {@link BeerDto}
+ */
+
 public class BeerMapper {
 
     public static Beer fromDto(BeerDto beerDto) {

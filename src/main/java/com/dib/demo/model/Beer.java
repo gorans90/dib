@@ -41,6 +41,9 @@ public class Beer extends BaseEntityAudit {
     @Column(name = "description")
     private String description;
 
+    /**
+     * Collection of integer values for mash temp
+     */
     @Column(name = "mash_temp", nullable = false)
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(

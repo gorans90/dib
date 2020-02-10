@@ -21,6 +21,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.stream.Collectors;
 
+/**
+ * Request and response logging for every request
+ */
+
 @Slf4j
 @Component
 public class RequestFilterLogging extends OncePerRequestFilter {
